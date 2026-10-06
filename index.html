@@ -1,0 +1,1161 @@
+<!doctype html>
+<html lang="id" class="no-gsap">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="LINA adalah aplikasi desktop untuk memahami metadata jaringan lokal lewat laporan yang jelas dan diproses langsung di perangkat."
+    >
+    <meta name="theme-color" content="#07111f">
+    <title>LINA — Learning Interconnected Network Analyzer</title>
+    <script>
+      document.documentElement.classList.add("js-scroll-hero");
+    </script>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        --night: #07111f;
+        --text: #f2f6fb;
+        --muted: #a9b8ca;
+        --blue: #78baff;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-width: 320px;
+        margin: 0;
+        background: var(--night);
+        color: var(--text);
+      }
+
+      .hero-scroll {
+        min-height: 100svh;
+        background: var(--night);
+      }
+
+      .hero-stage {
+        display: flex;
+        min-height: 100svh;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 48px 24px;
+        background:
+          radial-gradient(ellipse at 50% 50%, rgb(29 76 132 / 16%), transparent 48%),
+          var(--night);
+      }
+
+      .hero-content {
+        width: min(640px, 100%);
+        text-align: center;
+      }
+
+      .hero-logo {
+        display: block;
+        width: 112px;
+        height: auto;
+        margin: 0 auto 24px;
+      }
+
+      .hero-copy {
+        opacity: 1;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(30px, 5vw, 48px);
+        font-weight: 600;
+        letter-spacing: -0.045em;
+        line-height: 1.14;
+      }
+
+      .description {
+        max-width: 510px;
+        margin: 20px auto 0;
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.75;
+      }
+
+      .download-link {
+        display: inline-flex;
+        min-height: 50px;
+        align-items: center;
+        justify-content: center;
+        gap: 11px;
+        margin-top: 30px;
+        padding: 0 21px;
+        border: 1px solid var(--blue);
+        border-radius: 6px;
+        background: var(--blue);
+        color: #07111f;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+        transition:
+          background-color 160ms ease,
+          border-color 160ms ease,
+          transform 160ms ease;
+      }
+
+      .download-link:hover {
+        transform: translateY(-2px);
+        border-color: #abd5ff;
+        background: #abd5ff;
+      }
+
+      .download-link:focus-visible {
+        outline: 3px solid #fff;
+        outline-offset: 4px;
+      }
+
+      .download-link svg {
+        width: 17px;
+        height: 17px;
+      }
+
+      .download-section {
+        display: grid;
+        min-height: 100svh;
+        place-items: center;
+        padding: 88px 24px;
+        background: #091626;
+      }
+
+      .download-content {
+        width: min(760px, 100%);
+        text-align: center;
+      }
+
+      .download-heading h2 {
+        margin: 0;
+        font-size: clamp(34px, 5vw, 48px);
+        font-weight: 600;
+        letter-spacing: -0.045em;
+      }
+
+      .download-heading p {
+        margin: 14px auto 0;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .download-platforms {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+        margin-top: 38px;
+        text-align: center;
+      }
+
+      .download-platform {
+        position: relative;
+        display: flex;
+        min-height: 350px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        overflow: hidden;
+        padding: 34px;
+        border: 1px solid #26384e;
+        border-radius: 12px;
+        background: #0b1929;
+        color: var(--text);
+        text-decoration: none;
+        transition:
+          transform 240ms cubic-bezier(0.2, 0.75, 0.25, 1),
+          border-color 240ms ease,
+          background-color 240ms ease,
+          box-shadow 240ms ease;
+      }
+
+      .download-platform:hover {
+        transform: translateY(-6px);
+        border-color: rgb(120 186 255 / 62%);
+        background-color: #0e2034;
+        box-shadow: 0 20px 50px rgb(0 0 0 / 24%);
+      }
+
+      .download-platform:focus-visible {
+        outline: 3px solid var(--blue);
+        outline-offset: 5px;
+      }
+
+      .about-section {
+        min-height: 100svh;
+        background: #07111f;
+      }
+
+      .about-stage {
+        display: grid;
+        min-height: 100svh;
+        place-items: center;
+        overflow: hidden;
+        padding: 48px 24px;
+        perspective: 1800px;
+      }
+
+      .book-scene {
+        position: relative;
+        width: min(960px, 88vw);
+        height: min(560px, 72svh);
+        min-height: 410px;
+        transform-style: preserve-3d;
+        filter: drop-shadow(0 34px 46px rgb(0 0 0 / 34%));
+      }
+
+      .book-leaf,
+      .book-leaf-front,
+      .book-leaf-back,
+      .book-cover,
+      .book-cover-front,
+      .book-cover-back {
+        position: absolute;
+        inset: 0;
+        border-radius: 14px;
+      }
+
+      .book-leaf {
+        transform-origin: left center;
+        transform-style: preserve-3d;
+        will-change: transform;
+      }
+
+      .book-leaf--1 {
+        z-index: 9;
+      }
+
+      .book-leaf--2 {
+        z-index: 8;
+      }
+
+      .book-leaf--3 {
+        z-index: 7;
+      }
+
+      .book-leaf--4 {
+        z-index: 6;
+      }
+
+      .book-leaf--5 {
+        z-index: 5;
+      }
+
+      .book-leaf--6 {
+        z-index: 4;
+      }
+
+      .book-leaf-front,
+      .book-leaf-back {
+        display: flex;
+        align-items: center;
+        padding: clamp(30px, 6vw, 76px);
+        backface-visibility: hidden;
+      }
+
+      .book-leaf-front {
+        background: #eef2f6;
+        color: #10243a;
+        box-shadow:
+          inset 0 0 0 1px rgb(22 43 65 / 8%),
+          inset 0 -10px 25px rgb(32 55 78 / 4%);
+      }
+
+      .book-leaf-back {
+        transform: rotateY(180deg);
+        background:
+          repeating-linear-gradient(
+            0deg,
+            rgb(16 36 58 / 3%) 0,
+            rgb(16 36 58 / 3%) 1px,
+            transparent 1px,
+            transparent 5px
+          ),
+          #e5ebf1;
+      }
+
+      .book-page-content {
+        width: min(620px, 100%);
+        margin: auto;
+      }
+
+      .book-kicker {
+        margin: 0 0 18px;
+        color: #48637f;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .book-page-content h2 {
+        margin: 0;
+        color: #10243a;
+        font-size: clamp(34px, 5vw, 54px);
+        font-weight: 650;
+        letter-spacing: -0.055em;
+        line-height: 1.06;
+      }
+
+      .book-description {
+        max-width: 590px;
+        margin: 22px 0 0;
+        color: #45596e;
+        font-size: clamp(16px, 2vw, 19px);
+        line-height: 1.75;
+      }
+
+      .book-page-number {
+        position: absolute;
+        right: clamp(24px, 4vw, 50px);
+        bottom: clamp(22px, 4vw, 40px);
+        color: #607991;
+        font-size: 13px;
+        font-variant-numeric: oldstyle-nums;
+        letter-spacing: 0.12em;
+      }
+
+      .book-cover {
+        z-index: 10;
+        transform: rotateY(-180deg);
+        transform-origin: left center;
+        transform-style: preserve-3d;
+        will-change: transform;
+      }
+
+      .book-cover-front,
+      .book-cover-back {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        backface-visibility: hidden;
+      }
+
+      .book-cover-front {
+        border: 1px solid #33506e;
+        background: linear-gradient(145deg, #163655, #0c1d31 82%);
+      }
+
+      .book-cover-front::before {
+        position: absolute;
+        inset: 12px;
+        border: 1px solid rgb(193 219 247 / 16%);
+        border-radius: 8px;
+        content: "";
+        pointer-events: none;
+      }
+
+      .book-cover-logo {
+        display: block;
+        width: clamp(180px, 32vw, 310px);
+        height: auto;
+      }
+
+      .book-cover-back {
+        transform: rotateY(180deg);
+        background:
+          repeating-linear-gradient(
+            0deg,
+            rgb(16 36 58 / 3%) 0,
+            rgb(16 36 58 / 3%) 1px,
+            transparent 1px,
+            transparent 5px
+          ),
+          #e5ebf1;
+      }
+
+      .no-gsap .about-stage {
+        display: block;
+        overflow: visible;
+        padding: 48px 24px;
+      }
+
+      .no-gsap .book-scene {
+        display: grid;
+        height: auto;
+        min-height: 0;
+        gap: 16px;
+        filter: none;
+      }
+
+      .no-gsap .book-leaf {
+        position: relative;
+        inset: auto;
+        min-height: 340px;
+        transform: none !important;
+      }
+
+      .no-gsap .book-leaf-front {
+        position: relative;
+        min-height: 340px;
+        padding-bottom: 60px;
+        backface-visibility: visible;
+      }
+
+      .no-gsap .book-leaf-back,
+      .no-gsap .book-cover {
+        display: none;
+      }
+
+      .site-footer {
+        position: relative;
+        overflow: hidden;
+        border-top: 1px solid rgb(151 181 214 / 12%);
+        background:
+          radial-gradient(ellipse at 12% 0%, rgb(48 91 135 / 18%), transparent 52%),
+          #091626;
+      }
+
+      .footer-inner {
+        width: min(1120px, 100%);
+        margin: 0 auto;
+        padding: 56px 32px 24px;
+      }
+
+      .footer-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 40px;
+        padding-bottom: 42px;
+      }
+
+      .footer-brand {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 8px;
+        color: var(--text);
+        text-decoration: none;
+      }
+
+      .footer-brand-name {
+        font-size: 23px;
+        font-weight: 650;
+        letter-spacing: -0.045em;
+      }
+
+      .footer-brand-caption {
+        max-width: 300px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 12px;
+      }
+
+      .footer-link {
+        display: inline-flex;
+        min-height: 44px;
+        align-items: center;
+        gap: 10px;
+        padding: 0 15px;
+        border: 1px solid #283a50;
+        border-radius: 8px;
+        color: #dbe7f4;
+        font-size: 14px;
+        font-weight: 550;
+        text-decoration: none;
+        transition:
+          border-color 180ms ease,
+          background-color 180ms ease,
+          color 180ms ease;
+      }
+
+      .footer-link:hover {
+        border-color: #55789d;
+        background: rgb(120 186 255 / 7%);
+        color: #fff;
+      }
+
+      .footer-link:focus-visible,
+      .footer-back-to-top:focus-visible,
+      .footer-brand:focus-visible {
+        outline: 3px solid var(--blue);
+        outline-offset: 4px;
+      }
+
+      .footer-link svg {
+        width: 17px;
+        height: 17px;
+        flex: 0 0 auto;
+      }
+
+      .footer-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px 28px;
+        padding-top: 20px;
+        border-top: 1px solid rgb(151 181 214 / 12%);
+        color: #91a3b8;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .footer-bottom p {
+        margin: 0;
+      }
+
+      .footer-back-to-top {
+        flex: 0 0 auto;
+        color: #c3d1e0;
+        text-decoration: none;
+        transition: color 180ms ease;
+      }
+
+      .footer-back-to-top:hover {
+        color: #fff;
+      }
+
+      .platform-icon {
+        display: grid;
+        width: 148px;
+        height: 148px;
+        flex: 0 0 auto;
+        place-items: center;
+      }
+
+      .platform-icon svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .platform-name {
+        margin: 0;
+        font-size: 21px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      .js-scroll-hero .hero-scroll {
+        height: 220svh;
+        min-height: 0;
+      }
+
+      .js-scroll-hero .hero-stage {
+        position: sticky;
+        top: 0;
+        display: block;
+        height: 100svh;
+        min-height: 0;
+        padding: 0;
+      }
+
+      .js-scroll-hero .hero-content {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+      }
+
+      .js-scroll-hero .hero-logo {
+        --end-logo-width: 112px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: min(70vw, 740px);
+        height: auto;
+        margin: 0;
+        transform: translate(-50%, calc(-50% + var(--logo-y, 0px)))
+          scale(var(--logo-scale, 1));
+        transform-origin: center;
+        will-change: transform;
+      }
+
+      .js-scroll-hero .hero-copy {
+        position: absolute;
+        top: calc(50% + 68px);
+        left: 50%;
+        width: min(640px, calc(100% - 48px));
+        opacity: var(--copy-opacity, 0);
+        transform: translate(-50%, calc(-50% + var(--copy-y, 26px)));
+        will-change: opacity, transform;
+      }
+
+      @media (max-width: 520px) {
+        .hero-stage {
+          padding-inline: 24px;
+        }
+
+        .hero-description {
+          font-size: 16px;
+        }
+
+        .download-platforms {
+          grid-template-columns: 1fr;
+          gap: 14px;
+          margin-top: 30px;
+        }
+
+        .download-platform {
+          min-height: 250px;
+          gap: 18px;
+          padding: 26px;
+        }
+
+        .footer-inner {
+          padding: 40px 22px 22px;
+        }
+
+        .footer-top {
+          flex-direction: column;
+          gap: 26px;
+          padding-bottom: 30px;
+        }
+
+        .footer-links {
+          width: 100%;
+          justify-content: flex-start;
+        }
+
+        .footer-link {
+          flex: 1 1 100%;
+        }
+
+        .footer-bottom {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .platform-icon {
+          width: 112px;
+          height: 112px;
+        }
+
+        .about-stage {
+          padding-inline: 18px;
+        }
+
+        .book-scene {
+          width: min(420px, 90vw);
+          height: min(520px, 70svh);
+          min-height: 400px;
+        }
+
+        .book-leaf-front {
+          padding: 24px;
+        }
+
+        .book-page-number {
+          right: 24px;
+          bottom: 20px;
+        }
+
+        .no-gsap .about-stage {
+          padding-inline: 18px;
+        }
+
+        .no-gsap .book-scene {
+          width: 100%;
+        }
+
+        .no-gsap .book-leaf,
+        .no-gsap .book-leaf-front {
+          min-height: 0;
+        }
+
+        .js-scroll-hero .hero-logo {
+          --end-logo-width: 96px;
+          width: 76vw;
+        }
+
+        .js-scroll-hero .hero-copy {
+          top: calc(50% + 54px);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main id="top">
+      <section class="hero-scroll" aria-labelledby="hero-title">
+        <div class="hero-stage">
+          <div class="hero-content">
+            <img
+              class="hero-logo"
+              src="https://raw.githubusercontent.com/BangAguse/Gambar/main/lina.png"
+              alt="LINA"
+              width="1280"
+              height="720"
+              decoding="async"
+            >
+            <div class="hero-copy">
+              <h1 id="hero-title">Learning Interconnected Network Analyzer</h1>
+              <p class="description">
+                LINA membantu memahami metadata jaringan lokal melalui laporan
+                defensif yang mudah dibaca. Semua data diproses langsung di
+                perangkatmu.
+              </p>
+              <a class="download-link" href="#download">
+                <span>Lihat pilihan unduhan</span>
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path
+                    d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.7"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="download-section"
+        id="download"
+        aria-labelledby="download-title"
+      >
+        <div class="download-content">
+          <header class="download-heading">
+            <h2 id="download-title">Unduh LINA</h2>
+            <p>Pilih paket sesuai sistem operasi yang kamu gunakan.</p>
+          </header>
+          <div class="download-platforms">
+            <a
+              class="download-platform"
+              href="https://github.com/BangAguse/LINA/releases/download/v1.0.0/lina_1.0.0_windows_x64_setup.zip"
+              download="lina_1.0.0_windows_x64_setup.zip"
+              aria-label="Unduh LINA untuk Windows"
+            >
+              <span class="platform-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none">
+                  <path d="m4 9 18-2.5v16.4H4V9Z" fill="#00A4EF" />
+                  <path d="m25 6.2 19-2.7v19.4H25V6.2Z" fill="#00A4EF" />
+                  <path d="M4 25.2h18v16.3L4 39V25.2Z" fill="#00A4EF" />
+                  <path d="M25 25.2h19v19.3l-19-2.7V25.2Z" fill="#00A4EF" />
+                </svg>
+              </span>
+              <span class="platform-name">Windows</span>
+            </a>
+            <a
+              class="download-platform"
+              href="https://github.com/BangAguse/LINA/releases/download/v1.0.0/lina_1.0.0_linux_amd64.tar.xz"
+              download="lina_1.0.0_linux_amd64.tar.xz"
+              aria-label="Unduh LINA untuk Linux"
+            >
+              <span class="platform-icon" aria-hidden="true">
+                <svg viewBox="0 0 64 64" fill="none">
+                  <path
+                    d="M24 25c0-11 3-18 8-18s8 7 8 18c6 5 10 14 10 24 0 8-7 12-18 12s-18-4-18-12c0-10 4-19 10-24Z"
+                    fill="#EAF1FA"
+                  />
+                  <path
+                    d="M24 35c-3 5-5 12-4 16 1 4 6 6 12 6s11-2 12-6c1-4-1-11-4-16-4-3-12-3-16 0Z"
+                    fill="#33465E"
+                  />
+                  <ellipse cx="27" cy="25" rx="2.2" ry="3" fill="#0B1929" />
+                  <ellipse cx="37" cy="25" rx="2.2" ry="3" fill="#0B1929" />
+                  <path d="m28 30 4-2 4 2-4 3-4-3Z" fill="#F4B41B" />
+                  <path d="M22 58c-2 0-5 1-7 3 4 2 9 2 13 0l-1-3h-5Z" fill="#F4B41B" />
+                  <path d="M42 58c2 0 5 1 7 3-4 2-9 2-13 0l1-3h5Z" fill="#F4B41B" />
+                </svg>
+              </span>
+              <span class="platform-name">Linux</span>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section class="about-section" id="about" aria-labelledby="about-title">
+        <div class="about-stage">
+          <div class="book-scene">
+            <article class="book-leaf book-leaf--1">
+              <div class="book-leaf-front">
+                <div class="book-page-content">
+                  <p class="book-kicker">Tentang LINA</p>
+                  <h2 id="about-title">Apa itu LINA?</h2>
+                  <p class="book-description">
+                    LINA adalah aplikasi desktop untuk meninjau metadata
+                    jaringan lokal dan menyajikannya sebagai laporan defensif
+                    yang mudah dipahami. Pengumpulan dan pemrosesan data
+                    dilakukan langsung di perangkat.
+                  </p>
+                </div>
+                <span class="book-page-number" aria-label="Halaman satu">I</span>
+              </div>
+              <div class="book-leaf-back" aria-hidden="true"></div>
+            </article>
+            <article class="book-leaf book-leaf--2">
+              <div class="book-leaf-front">
+                <div class="book-page-content">
+                  <p class="book-kicker">Kenali penggunanya</p>
+                  <h2 id="about-audience-title">Untuk Siapa?</h2>
+                  <p class="book-description">
+                    Untuk pemilik jaringan rumahan, pelajar, dan siapa pun yang
+                    ingin memahami perangkat serta aktivitas jaringan lokalnya
+                    lewat ringkasan yang lebih mudah dibaca.
+                  </p>
+                </div>
+                <span class="book-page-number" aria-label="Halaman dua">II</span>
+              </div>
+              <div class="book-leaf-back" aria-hidden="true"></div>
+            </article>
+            <article class="book-leaf book-leaf--3">
+              <div class="book-leaf-front">
+                <div class="book-page-content">
+                  <p class="book-kicker">Mengapa LINA dibuat</p>
+                  <h2 id="about-problem-title">Masalah Apa yang Diselesaikan?</h2>
+                  <p class="book-description">
+                    Informasi jaringan mentah sering sulit ditafsirkan. LINA
+                    merangkumnya menjadi laporan metadata lokal agar pengguna
+                    dapat mengenali perangkat dan memahami kondisi jaringan
+                    miliknya dengan lebih jelas.
+                  </p>
+                </div>
+                <span class="book-page-number" aria-label="Halaman tiga">III</span>
+              </div>
+              <div class="book-leaf-back" aria-hidden="true"></div>
+            </article>
+            <article class="book-leaf book-leaf--4">
+              <div class="book-leaf-front">
+                <div class="book-page-content">
+                  <p class="book-kicker">Memilih alat yang tepat</p>
+                  <h2 id="about-wireshark-title">
+                    Apa Bedanya LINA dengan Wireshark?
+                  </h2>
+                  <p class="book-description">
+                    LINA berfokus pada laporan metadata dan kemudahan
+                    memahami jaringan. Wireshark adalah penganalisis paket
+                    yang memberi kendali lebih mendalam untuk memeriksa lalu
+                    lintas jaringan. Keduanya punya tujuan berbeda; LINA bukan
+                    pengganti Wireshark.
+                  </p>
+                </div>
+                <span class="book-page-number" aria-label="Halaman empat">IV</span>
+              </div>
+              <div class="book-leaf-back" aria-hidden="true"></div>
+            </article>
+            <article class="book-leaf book-leaf--5">
+              <div class="book-leaf-front">
+                <div class="book-page-content">
+                  <p class="book-kicker">Privasi dan tanggung jawab</p>
+                  <h2 id="about-safety-title">Apakah LINA Aman?</h2>
+                  <p class="book-description">
+                    Pemrosesan dilakukan lokal, tetapi hasil pemindaian dan
+                    tangkapan paket dapat memuat informasi sensitif. Gunakan
+                    hanya pada jaringan yang kamu miliki atau berwenang untuk
+                    periksa, dan jaga keamanan berkas hasilnya.
+                  </p>
+                </div>
+                <span class="book-page-number" aria-label="Halaman lima">V</span>
+              </div>
+              <div class="book-leaf-back" aria-hidden="true"></div>
+            </article>
+            <article class="book-leaf book-leaf--6">
+              <div class="book-leaf-front">
+                <div class="book-page-content">
+                  <p class="book-kicker">Komponen pendukung</p>
+                  <h2 id="about-tools-title">Kenapa Perlu Nmap/Npcap?</h2>
+                  <p class="book-description">
+                    Nmap diperlukan untuk penemuan perangkat Wi-Fi. Di Windows,
+                    Npcap diperlukan agar LINA dapat melakukan penangkapan
+                    paket langsung. Kebutuhan ini bergantung pada fitur yang
+                    digunakan; ikuti petunjuk instalasi untuk sistem
+                    operasimu.
+                  </p>
+                </div>
+                <span class="book-page-number" aria-label="Halaman enam">VI</span>
+              </div>
+              <div class="book-leaf-back" aria-hidden="true"></div>
+            </article>
+            <div class="book-cover" aria-hidden="true">
+              <div class="book-cover-front">
+                <img
+                  class="book-cover-logo"
+                  src="https://raw.githubusercontent.com/BangAguse/Gambar/main/lina.png"
+                  alt=""
+                  width="1280"
+                  height="720"
+                  decoding="async"
+                >
+              </div>
+              <div class="book-cover-back"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer" aria-label="Informasi dan tautan LINA">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <a class="footer-brand" href="#top" aria-label="LINA — kembali ke atas">
+            <span class="footer-brand-name">LINA</span>
+            <span class="footer-brand-caption">
+              Learning Interconnected Network Analyzer
+            </span>
+          </a>
+          <nav class="footer-links" aria-label="Tautan proyek">
+            <a
+              class="footer-link"
+              href="https://github.com/BangAguse"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.08c-3.1.67-3.75-1.32-3.75-1.32-.5-1.28-1.24-1.62-1.24-1.62-1.02-.7.08-.68.08-.68 1.12.08 1.72 1.14 1.72 1.14 1 .71 2.62.51 3.26.39.1-.73.39-1.23.7-1.52-2.48-.28-5.08-1.24-5.08-5.52 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.06 1.15a10.65 10.65 0 0 1 5.57 0c2.13-1.44 3.06-1.15 3.06-1.15.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.29-2.6 5.23-5.09 5.51.4.35.75 1.02.75 2.06v3.64c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"
+                />
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <a
+              class="footer-link"
+              href="https://github.com/BangAguse/LINA/releases"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path
+                  d="M7.25 12.75 12.7 7.3m-4.95.2h4.95v4.95M12 3.75h2.25A2 2 0 0 1 16.25 5.75v8.5a2 2 0 0 1-2 2h-8.5a2 2 0 0 1-2-2V5.75a2 2 0 0 1 2-2H8"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+              <span>Releases</span>
+            </a>
+            <a
+              class="footer-link"
+              href="https://www.instagram.com/knndawdyntra_/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect
+                  x="3.25"
+                  y="3.25"
+                  width="17.5"
+                  height="17.5"
+                  rx="5.25"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4.1"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                />
+                <circle cx="17.65" cy="6.5" r="1.1" fill="currentColor" />
+              </svg>
+              <span>Instagram</span>
+            </a>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 LINA. Dibuat untuk membantu memahami jaringan lokal.</p>
+          <a class="footer-back-to-top" href="#top">Kembali ke atas ↑</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (() => {
+        const section = document.querySelector(".hero-scroll");
+        const stage = document.querySelector(".hero-stage");
+        const logo = document.querySelector(".hero-logo");
+        const copy = document.querySelector(".hero-copy");
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+        let framePending = false;
+
+        const updateTransition = () => {
+          framePending = false;
+          const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+          const transitionDistance = window.innerHeight * 0.75;
+          let progress = Math.min(
+            1,
+            Math.max(0, (window.scrollY - sectionTop) / transitionDistance),
+          );
+
+          if (reducedMotion.matches) {
+            progress = window.scrollY > sectionTop ? 1 : 0;
+          }
+
+          const startWidth = logo.offsetWidth;
+          const endWidth = Number.parseFloat(
+            window.getComputedStyle(logo).getPropertyValue("--end-logo-width"),
+          );
+          const endScale = Math.min(1, endWidth / startWidth);
+          const copyProgress = Math.min(1, Math.max(0, (progress - 0.12) / 0.58));
+          const copyTop = Number.parseFloat(window.getComputedStyle(copy).top)
+            - copy.offsetHeight / 2;
+          const endLogoY = copyTop + 8 - stage.clientHeight / 2
+            - (logo.offsetHeight * endScale) / 2;
+
+          section.style.setProperty(
+            "--logo-scale",
+            String(1 + (endScale - 1) * progress),
+          );
+          section.style.setProperty("--logo-y", `${endLogoY * progress}px`);
+          section.style.setProperty("--copy-opacity", String(copyProgress));
+          section.style.setProperty("--copy-y", `${26 * (1 - copyProgress)}px`);
+        };
+
+        const scheduleTransitionUpdate = () => {
+          if (framePending) return;
+          framePending = true;
+          window.requestAnimationFrame(updateTransition);
+        };
+
+        window.addEventListener("scroll", scheduleTransitionUpdate, { passive: true });
+        window.addEventListener("resize", scheduleTransitionUpdate);
+        reducedMotion.addEventListener("change", scheduleTransitionUpdate);
+        updateTransition();
+      })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script>
+      if (
+        window.gsap
+        && window.ScrollTrigger
+        && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        document.documentElement.classList.remove("no-gsap");
+        document.documentElement.classList.add("scroll-book-enabled");
+        gsap.registerPlugin(ScrollTrigger);
+
+        const downloadEntrance = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".download-section",
+            start: "top 76%",
+            once: true,
+          },
+        });
+
+        downloadEntrance
+          .fromTo(
+            ".download-heading",
+            { y: 26, autoAlpha: 0 },
+            {
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.65,
+              ease: "power3.out",
+            },
+          )
+          .fromTo(
+            ".download-platform",
+            { y: 18, autoAlpha: 0, scale: 0.97 },
+            {
+              y: 0,
+              autoAlpha: 1,
+              scale: 1,
+              duration: 0.7,
+              stagger: 0.16,
+              ease: "power3.out",
+            },
+            "-=0.28",
+          )
+          .fromTo(
+            ".platform-icon",
+            { scale: 0.68, rotation: -8 },
+            {
+              scale: 1,
+              rotation: 0,
+              duration: 0.6,
+              stagger: 0.16,
+              ease: "back.out(1.7)",
+            },
+            "-=0.5",
+          )
+          .fromTo(
+            ".platform-name",
+            { y: 12, autoAlpha: 0 },
+            {
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.5,
+              stagger: 0.16,
+              ease: "power2.out",
+            },
+            "-=0.35",
+          );
+
+        const bookOpening = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".about-section",
+            start: "top top",
+            end: () => window.matchMedia("(max-width: 520px)").matches
+              ? "+=1200%"
+              : "+=840%",
+            scrub: 0.1,
+            pin: ".about-stage",
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        bookOpening
+          .fromTo(
+            ".book-cover",
+            { rotationY: 0 },
+            { rotationY: -180, duration: 1, ease: "none" },
+          );
+
+        gsap.utils.toArray(".book-leaf").slice(0, 5).forEach((leaf) => {
+          bookOpening.to(leaf, {
+            rotationY: -180,
+            duration: 1,
+            ease: "none",
+          });
+        });
+
+        gsap.utils.toArray(".book-leaf").slice(0, 5).reverse().forEach((leaf) => {
+          bookOpening.to(leaf, {
+            rotationY: 0,
+            duration: 1,
+            ease: "none",
+          });
+        });
+
+        bookOpening.to(".book-cover", {
+          rotationY: 0,
+          duration: 1,
+          ease: "none",
+        });
+      }
+    </script>
+  </body>
+</html>
